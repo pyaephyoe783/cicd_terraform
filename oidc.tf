@@ -24,7 +24,7 @@ resource "aws_iam_role" "github_actions_role" {
         }
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" : "repo:pyaephyoe783/-aws_terraform_1:*"//ဒီ repo ကလာတယ့်သူတွေ
+            "token.actions.githubusercontent.com:sub" : "repo:pyaephyoe783/cicd_terraform:*"//ဒီ repo ကလာတယ့်သူတွေ
           }
           StringEquals = {
             "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"//ဒီဧည့်သည်ကဒ်က sts:amazon အတွက်ထုတ်ထားတာလားစစ်ဆေးတာ
