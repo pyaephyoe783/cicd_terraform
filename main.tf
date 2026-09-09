@@ -289,11 +289,11 @@ resource "aws_lb_target_group_attachment" "web_tg_attachment_1" {
   port             = 80
 }
 
-resource "aws_lb_target_group_attachment" "web_tg_attachment_2" {
-  target_group_arn = aws_lb_target_group.web_tg.arn
-  target_id        = aws_instance.web_sever_2.id
-  port             = 80
-}
+# resource "aws_lb_target_group_attachment" "web_tg_attachment_2" {
+#   target_group_arn = aws_lb_target_group.web_tg.arn
+#   target_id        = aws_instance.web_sever_2.id
+#   port             = 80
+# }
 
 resource "aws_lb" "web_alb" {
   name               = "web-alb"
