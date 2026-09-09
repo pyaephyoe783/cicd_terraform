@@ -6,13 +6,13 @@ terraform {
     }
   }
 
-  # backend "s3" {
-  #   bucket       = "my-tf-state-bucket-ye-yint-2026"
-  #   key          = "global/s3/terraform.tfstate"
-  #   region       = "us-east-1"
-  #   encrypt      = true
-  #   use_lockfile = true
-  # }
+  backend "s3" {
+    bucket       = "my-tf-state-bucket-ye-yint-2026"
+    key          = "global/s3/terraform.tfstate"
+    region       = "us-east-1"
+    encrypt      = true
+    use_lockfile = true
+  }
 }
 
 provider "aws" {
@@ -319,8 +319,8 @@ resource "aws_lb_listener" "web_alb_listener" {
 }
 
 
-resource "aws_db_subnet_group" "rds_subent_group"{
-  name       = "main-rds-subnet-group"
+resource "aws_db_subnet_group" "rds_subent_group_v2"{
+  name       = "main-rds-subnet-group-v2"
   subnet_ids = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
 
   tags = {
@@ -359,11 +359,12 @@ resource "aws_db_instance" "main_rds" {
   username              = "dbadmin"
   password              = var.db_password
 
-  db_subnet_group_name = aws_db_subnet_group.rds_subent_group.name
+  db_subnet_group_name = aws_db_subnet_group.rds_subent_group_v2.name
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
   publicly_accessible = false
   skip_final_snapshot   = true
+  deletion_protection = false  // ဖျက်တာမြန်အောင်ထည့်ထားတာမသုံးသင့်
 
   tags = {
     Name = "Main-RDS-Instance"
