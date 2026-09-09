@@ -238,27 +238,27 @@ resource "aws_instance" "web_sever_1" {
   }
 }
 
-resource "aws_instance" "web_sever_2" {
-  ami                    = data.aws_ami.ubuntu_golden.id
-  instance_type          = var.instance_type
-  subnet_id              = aws_subnet.private_subnet_2.id
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  depends_on             = [aws_nat_gateway.nat_gw]
-  iam_instance_profile   = aws_iam_instance_profile.ec2_ssm_profile.name
+# resource "aws_instance" "web_sever_2" {
+#   ami                    = data.aws_ami.ubuntu_golden.id
+#   instance_type          = var.instance_type
+#   subnet_id              = aws_subnet.private_subnet_2.id
+#   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
+#   depends_on             = [aws_nat_gateway.nat_gw]
+#   iam_instance_profile   = aws_iam_instance_profile.ec2_ssm_profile.name
 
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo apt-get update -y
-              sudo apt-get install -y nginx
-              sudo systemctl start nginx
-              sudo systemctl enable nginx
-              echo "<h1>Welcome to Web Server 2</h1>" | sudo tee /var/www/html/index.html
-              EOF
+#   user_data = <<-EOF
+#               #!/bin/bash
+#               sudo apt-get update -y
+#               sudo apt-get install -y nginx
+#               sudo systemctl start nginx
+#               sudo systemctl enable nginx
+#               echo "<h1>Welcome to Web Server 2</h1>" | sudo tee /var/www/html/index.html
+#               EOF
 
-  tags = {
-    Name = "Web-Server-2"
-  }    
-}
+#   tags = {
+#     Name = "Web-Server-2"
+#   }    
+# }
 
 
 
