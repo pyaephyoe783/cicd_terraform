@@ -257,7 +257,7 @@ resource "aws_instance" "web_sever_2" {
 
   tags = {
     Name = "Web-Server-2"
-  }
+  }    
 }
 
 
